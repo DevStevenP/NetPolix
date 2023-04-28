@@ -1,0 +1,208 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+
+    <title>Netpolix | Formulario de registro</title>
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link th:href="@{/bootstrap/css/jumbotron.css}" rel="stylesheet">
+    <link th:href="@{/bootstrap/css/sticky-footer-navbar.css}" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <header th:insert="fragments/menu :: menu-principal"></header>
+    
+    
+    <div class="container py-4">
+
+		<div class="card bg-dark text-white">
+			<div class="card-header" th:text="${titulo}"></div>
+			<div class="card-body">
+				 <!--  
+				<div th:object="${usuario}" th:remove="tag">
+					<ul th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+						<li th:each="err: ${#fields.errors('*')}" th:text="${err}"></li>
+					</ul>
+				</div> --> 
+				<div class="alert alert-success" th:if="${success != null}" th:text="${success}"></div>
+				<div class="alert alert-danger" th:if="${error != null}" th:text="${error}"></div>
+				<div class="alert alert-warning" th:if="${warning != null}" th:text="${warning}"></div>
+				<div class="alert alert-info" th:if="${info != null}" th:text="${info}"></div>
+				
+				<form th:action="@{/usuarios/save}" th:object="${usuario}" method="post"> 
+					<div class="form-group row">
+						<label class="col-sm-2 col-form-label">Nombre</label>
+						<div class="col-sm-6">
+							<input type="text" th:field="*{nombre}" class="form-control"
+								th:errorclass="'form-control alert-danger'" /> <small
+								class="form-text text-danger"
+								th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" placeholder="Escriba su nombre"></small>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-sm-2 col-form-label">Apellido</label>
+						<div class="col-sm-6">
+							<input type="text" th:field="*{apellido}" class="form-control"
+								th:errorclass="'form-control alert-danger'" /> <small
+								class="form-text text-danger"
+								th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}" placeholder="Escriba su apellido"></small>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-sm-2 col-form-label">Cedula</label>
+						<div class="col-sm-6">
+							<input type="number" th:field="*{cedula}" class="form-control"
+								th:errorclass="'form-control alert-danger'" /> <small
+								class="form-text text-danger"
+								th:if="${#fields.hasErrors('cedula')}" th:errors="*{cedula}" placeholder="Escriba su cedula"></small>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-sm-2 col-form-label">Email</label>
+						<div class="col-sm-6">
+							<input type="text" th:field="*{email}" class="form-control"
+								th:errorclass="'form-control alert-danger'" /> <small
+								class="form-text text-danger"
+								th:if="${#fields.hasErrors('email')}" th:errors="*{email}" placeholder="Escriba su email"></small>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-sm-2 col-form-label">Fecha de Nacimiento</label>
+						<div class="col-sm-6">
+							<input type="text" class="form-control" th:field="*{fechaNacimiento}"
+								th:errorclass="'form-control alert-danger'" /> <small
+								class="form-text text-danger"
+								th:if="${#fields.hasErrors('fechaNacimiento')}" th:errors="*{fechaNacimiento}" placeholder="Escriba su fecha de nacimiento"></small>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-sm-2 col-form-label">Puntos</label>
+						<div class="col-sm-6">
+							<input type="text" th:field="*{puntos}" class="form-control"
+								th:errorclass="'form-control alert-danger'" /> <small
+								class="form-text text-danger"
+								th:if="${#fields.hasErrors('puntos')}" th:errors="*{puntos}"></small>
+						</div>
+					</div>
+					
+					<div class="form-group row">
+						<div class="col-sm-6">
+							<input type="submit" value="Crear Cliente" class="btn btn-secondary" />
+						</div>
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+
+
+<!--  
+    <main role="main">     
+      <hr>
+      <div class="container"> 
+
+        <div class="card">
+          <h4 class="card-header"><strong>Formulario de registro</strong></h4>              
+          <div class="card-body">
+            <form th:action="@{/usuarios/save}" th:object="${usuario}" method="post">      
+            
+            	<div th:if="${#fields.hasErrors('*')}" class='alert alert-danger' role='alert'>
+					Por favor corrija los siguientes errores:
+					<ul>
+					    <li th:each="err : ${#fields.errors('*')}" th:text="${err}" />
+					</ul>
+				</div>   
+				        
+              <div class="row">
+                <div class="col-md-3"> 
+                  <div class="form-group">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" class="form-control" th:field="*{nombre}" id="nombre" name="nombre" placeholder="Escriba su nombre" required="required">
+                  </div>
+                </div>
+                <div class="col-md-3"> 
+                  <div class="form-group">
+                    <label for="apellido">Apellido</label>
+                    <input type="text" class="form-control" th:field="*{apellido}" id="apellido" name="apellido" placeholder="Escriba su apellido" required="required">
+                  </div>
+                </div>
+                <div class="col-md-3"> 
+                  <div class="form-group">
+                    <label for="cedula">Cedula</label>
+                    <input type="text" class="form-control" th:field="*{cedula}" id="cedula" name="cedula" placeholder="Escriba su documento" required="required">
+                  </div>
+                </div>
+                <div class="col-md-3"> 
+                  <div class="form-group">
+                    <label for="email">Correo electrónico</label>
+                    <input type="email" class="form-control" th:field="*{email}" id="email" name="email" placeholder="Escriba su correo electrónico" required="required">
+                  </div> 
+                </div>    
+                <div class="col-md-3"> 
+                  <div class="form-group">
+                    <label for="fecha">Fecha de Nacimiento</label>
+                    <input type="text" class="form-control" name="fecha" th:field="*{fechaNacimiento}" id="fecha" placeholder="Fecha de Nacimiento" required="required">
+                  </div>  
+                </div>
+                <div class="col-md-3"> 
+                  <div class="form-group">
+                    <label for="fecha2">Fecha de Ingreso</label>
+                    <input type="text" class="form-control" name="fecha2" th:field="*{fechaIngreso}" id="fecha2" placeholder="Fecha de ingreso" required="required">
+                  </div>  
+                </div>
+                <div class="col-md-3"> 
+                  <div class="form-group">
+                    <label for="puntos">Puntos de referido</label>
+                    <input type="text" class="form-control" th:field="*{puntos}" id="puntos" name="puntos" placeholder="Escriba sus puntos" required="required">
+                  </div>
+                </div>
+                <!--  
+                <div class="col-md-3"> 
+                  <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" th:field="*{password}" id="password" name="password" placeholder="Escriba su clave de acceso" required="required">
+                  </div>
+                </div> --
+              </div>                  
+              <hr>
+              <button type="submit" title="Quiero registrarme." class="btn btn-primary">Registrarse</button>  
+            </form>
+          </div>
+        </div> 
+      </div> 
+
+    </main> -->
+
+    <footer th:insert="fragments/footer :: pie-pagina" class="footer"></footer>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> 
+    <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script> 
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script th:src="@{/tinymce/tinymce.min.js}"></script>
+    <script>
+      $(function () {
+          $("#fecha").datepicker({dateFormat: 'dd-mm-yy'});
+        }
+      );
+      
+      tinymce.init({
+          selector: '#detalles',
+          plugins: "textcolor, table lists code",
+          toolbar: " undo redo | bold italic | alignleft aligncenter alignright alignjustify \n\
+                    | bullist numlist outdent indent | forecolor backcolor table code"
+      });
+      
+    </script>
+  </body>
+</html>

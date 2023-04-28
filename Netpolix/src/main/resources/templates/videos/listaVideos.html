@@ -1,0 +1,83 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <link rel="icon" href="favicon.ico">
+    <title>Netpolix | Listado de Videos</title>
+    
+    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/bootstrap/css/jumbotron.css}" rel="stylesheet">
+    <link th:href="@{/bootstrap/css/sticky-footer-navbar.css}" rel="stylesheet">
+    <link href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <header th:insert="fragments/menu :: menu-principal"></header>
+
+    <main role="main">     
+      <hr>
+      <div class="container"> 
+		<!-- <strong>Listado de Usuarios</strong> -->
+        <div class="card">
+          <h4 class="card-header" th:text="${titulo}"></h4>              
+          <div class="card-body">            
+            <hr>
+            <div th:if="${msg != null}" class='alert alert-success' th:text="${msg}" role='alert'></div>
+            
+            <div class="alert alert-success" th:if="${success != null}" th:text="${success}"></div>
+			<div class="alert alert-danger" th:if="${error != null}" th:text="${error}"></div>
+			<div class="alert alert-warning" th:if="${warning != null}" th:text="${warning}"></div>
+			<div class="alert alert-info" th:if="${info != null}" th:text="${info}"></div>
+			
+			<h4 class="card-title">
+					<a th:href="@{/video/crearVideo}" class="btn btn-primary">Crear Video</a>
+				</h4>
+            <table class="table table-hover">
+              <thead class="thead-light">
+                <tr>
+                  <th scope="col">Isan</th>
+                  <th scope="col">Titulo</th>
+                  <th scope="col">Año</th>                  
+                  <th scope="col">Duracion</th>
+                  <th scope="col">Categoria</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr th:each="video : ${videos}">
+                 <td th:text="${video.isan}"></td>
+                  <td th:text="${video.titulo}"></td>
+                  <td th:text="${video.ano}"></td>
+                  <td th:text="${video.duracion}"> </td>
+                  <td th:text="${video.categoria.nombreCategoria}"> </td>
+
+                  
+                  <!--  
+                  <td>
+                    <a th:href="@{/usuarios/delete/{id} (id=${usuario.id}) }" class="btn btn-success btn-sm confirmar" role="button" title="Eliminar"><i class="fas fa-trash" aria-hidden="true"></i></a>
+                    
+                    <span th:switch="${usuario.estatus}"> 
+                    
+                      <a th:case="'1'" th:href="@{/usuarios/lock/{id} (id=${usuario.id}) }" class="btn btn-success btn-sm" role="button" title="Bloquear el acceso al sistema para este usuario."><i class="fas fa-lock" aria-hidden="true"></i></a>	
+					  <a th:case="'0'" th:href="@{/usuarios/unlock/{id} (id=${usuario.id}) }" class="btn btn-success btn-sm" role="button" title="Permitir el acceso al sistema a este usuario."><i class="fas fa-unlock" aria-hidden="true"></i></a>
+					   
+					</span>
+                    
+                  </td>-->
+                </tr>                
+                               
+              </tbody>
+            </table>
+            
+          </div>
+        </div>
+      </div> <!-- /container -->
+
+    </main>
+
+    <footer th:insert="fragments/footer :: pie-pagina" class="footer"></footer>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+             
+  </body>
+</html>
