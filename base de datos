@@ -1,0 +1,12 @@
+inicializar base de dato
+
+spring.datasource.url=jdbc:mysql://localhost/netpolixdb?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+spring.datasource.username=root
+spring.datasource.password=12345
+spring.jpa.generate-ddl=false
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.database-platform=org.hibernate.dialect.MySQL57Dialect
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.jpa.show-sql=true
+spring.http.encoding.enabled=true
+spring.http.encoding.charset=UTF-8
